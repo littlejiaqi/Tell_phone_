@@ -1,0 +1,59 @@
+'''
+Author:Jiaqi Lin
+Date:2019-3-31
+Function:计算日期差
+'''
+
+def data_(year1,month1,day1,year2,month2,day2):
+    #判断year1是否为闰年，根据是否为闰年定每月的天数
+    if year1%4==0 and year1%100!=0 or year1%400==0:
+        month1_day=[31,29,31,30,31,30,31,31,30,31,30,31]
+    else:
+        month1_day=[31,28,31,30,31,30,31,31,30,31,30,31]
+    
+    y=year2-year1
+    m=month2-month1
+    #若同年
+    if y==0: 
+    #若同月  
+        if m==0:  
+            d=day2-day1
+    #若不同月
+        else: 
+            d=0  
+            for _ in range(month1,month1 + m):
+                d+=month1_day[_-1]
+            d=d-day1+day2
+        return d        
+  
+    #若不同年        
+    else:
+       #判断year2是否为闰年，根据是否为闰年定每月的天数
+        if year2%4==0 and year2%100!=0 or year2%400==0:
+          month2_day=[31,29,31,30,31,30,31,31,30,31,30,31]
+        else:
+          month2_day=[31,28,31,30,31,30,31,31,30,31,30,31]
+    
+    #对year1 和 year2 年份之间的每年的天数求和
+        y_=0
+        for i in range(year1+1,year1+y):
+            if i%4==0 and i%100!=0 or i%400==0:
+                y_+=366
+            else:
+                y_+=365
+    #计算year1剩余的天数和year2已经过了的天数
+        d_1 =0
+        for j in range(month1,12):
+            d_1 += month1_day[j]
+        d1 = d_1 +month1_day[month1-1]-day1
+
+        d_2=0
+        for k in range(0,month2-1):
+            d_2+=month2_day[k]
+        d2 =d_2+day2
+        d=y_+d1 + d2
+        return d  
+
+    
+
+print(data_(2016,1,22,2018,1,22))

@@ -1,0 +1,64 @@
+'''
+Author:Jiaqi Lin
+Date:2019-3-31
+Function:利用字典，创建一个通讯录，并能执行一些功能：新增联系人、删除联系人、查询联系人、4.显示所有联系人、5.退出
+'''
+
+#通讯录
+Tellbook={'lixia':111,'wenting':222,'xuying':333,'weixian':555,'chunling':666}
+
+#1增加姓名和手机
+def a_(Tellbook):
+    b=input("请输入用户姓名：")
+    if b in Tellbook:
+        print("该用户已存在")
+        a_(Tellbook)
+    else:
+        c=int(input("请输入电话号码："))
+        Tellbook[b]=c   
+
+#2删除手机
+def b_(Tellbook):
+    a=input("请输入想要删除的用户：")
+    if a not in Tellbook:
+        print("该用户不存在")
+        b_(Tellbook)
+    else:
+        del Tellbook[a]
+    
+#3根据姓名查找手机号
+def c_(Tellbook):
+    a=input("请输入用户姓名：")
+    if a not in Tellbook:
+        print("该用户不存在")
+        c_(Tellbook)
+    else:
+        print(Tellbook[a])
+
+#4查询所有用户
+def d_(Tellbook):
+    print("全部用户如下：")
+    return Tellbook
+
+#5退出
+def e_(Tellbook):
+    return "感谢使用通讯录"
+
+#根据提示，选择想要进入的功能
+def main_(Tellbook):
+    print("欢迎使用通讯录系统")
+#利用while循环，实现当选择一个功能后能不断选择其他功能或者退出
+    while(1):
+     a=int(input("\n"+"请选择您需要的功能："+"\n"+"1.增加姓名和手机 2.删除姓名 3.根据姓名查找手机号 4.查询所有用户 5.退出 "+'\n'))
+     if a==1:
+       print(a_(Tellbook))       
+     elif a==2:
+        print(b_(Tellbook))      
+     elif a==3:
+        print(c_(Tellbook))       
+     elif a==4:
+        print(d_(Tellbook))        
+     elif a==5:
+        print(e_(Tellbook))
+        break
+print(main_(Tellbook))
